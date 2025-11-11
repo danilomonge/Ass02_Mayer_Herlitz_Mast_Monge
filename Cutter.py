@@ -6,8 +6,9 @@ def visualize(data_source, renderer):
     # Create a plane inside dataset
     center = data_source.GetCenter()
     cutting_plane = vtk.vtkPlane()
-    cutting_plane.SetOrigin(center[0],center[1],center[2])
-    cutting_plane.SetNormal(0,0,1)
+    cutting_plane.SetOrigin(center[0],center[1],center[2]-0.5)
+    cutting_plane.SetNormal(-3,0,7)
+
     # Create cutter
     cutter = vtk.vtkCutter()
     cutter.SetInputData(data_source)
