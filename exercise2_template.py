@@ -9,20 +9,21 @@ visualization_mode = None  # None, 'color_map', 'cutting', 'isosurf', 'probing'
 # ------------------------------------------------------
 
 # Insert explanations for this section------------------
-# <explanation here>
+# Creates a PLOT3D (used for computational fluid dynamics data) reader 
 pl3d = vtk.vtkMultiBlockPLOT3DReader()
-# <explanation here>
+# Gives the path to the file containing the coordinates of the flow points in the 3D space
 pl3d.SetXYZFileName(data_root + "combxyz.bin")
+# Gives the path to the file containing the flow parameters (like velocity, pressure, temperature, etc.) for each point
 pl3d.SetQFileName(data_root + "combq.bin")
-# <explanation here>
+# Specifies which scalar function to read from the Q file (100 corresponds to temperature)
 pl3d.SetScalarFunctionNumber(100)
-# <explanation here>
+# Specifies which vector function to read from the Q file (202 corresponds to velocity vector)
 pl3d.SetVectorFunctionNumber(202)
-# <explanation here>
-pl3d.AddFunction(153)
-#
+# Adds an additional function to be read from the Q file (153 corresponds to Mach number -> ratio of flow speed to speed of sound)
+pl3d.AddFunction(153) 
+# Allows the reader to process the data and prepare it for further use, since it charges the data into memory
 pl3d.Update()
-# <explanation here>
+# Obtains the output data from the reader, specifically the first block (zone) of the multi-block dataset
 pl3d_output = pl3d.GetOutput().GetBlock(0)
 # End section ------------------------------------------
 
