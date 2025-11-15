@@ -5,14 +5,14 @@ import vtk
 def visualize(data_source, renderer):
     # Create a plane inside dataset
     center = data_source.GetCenter() # get center coordinates of the dataset
-    cutting_plane = vtk.vtkPlane() # create a plane
-    cutting_plane.SetOrigin(center[0],center[1],center[2]-0.5) # set position of plane
-    cutting_plane.SetNormal(-3,0,7) # defines the orientation of the plane
+    ctPlane = vtk.vtkPlane() # create a plane
+    ctPlane.SetOrigin(center[0],center[1],center[2]-0.5) # set position of plane
+    ctPlane.SetNormal(-3,0,7) # defines the orientation of the plane
 
     # Create cutter
     cutter = vtk.vtkCutter() # create cutter
     cutter.SetInputData(data_source) # connects the cutter with the dataset
-    cutter.SetCutFunction(cutting_plane) # set plane as cutting function
+    cutter.SetCutFunction(ctPlane) # set plane as cutting function
     cutter.Update() # update cutter to process the data
 
     # Create lookuptable
